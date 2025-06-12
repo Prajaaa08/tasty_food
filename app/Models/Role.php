@@ -14,6 +14,7 @@ class Role extends Model
         'menu_access',
         'about_us_access',
         'about_us_gallery_access',
+        'users_access',
         'slider_gallery_access',
         'gallery_access',
         'contact_access',
