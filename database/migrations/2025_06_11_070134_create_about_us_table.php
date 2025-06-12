@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('about_us', function (Blueprint $table) {
             $table->id();
-            $table->enum('content', ['1', '2', '3']);
+            $table->longText('content');
+            $table->enum('position', ['atas', 'tengah', 'bawah']);
             $table->string('title');
             $table->timestamps();
         });

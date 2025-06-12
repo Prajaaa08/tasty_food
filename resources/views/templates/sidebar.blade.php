@@ -80,4 +80,18 @@
             </div>
         </div>
     </li>
+
+    <div class="sidebar-heading">About Us</div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseaboutUs" aria-expanded="true" aria-controls="collapseaboutUs">
+            <i class="fa-solid fa-photo"></i>
+            <span>About Us</span>
+        </a>
+        <div id="collapseaboutUs" class="collapse" aria-labelledby="headingaboutUs" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/aboutUs">Konten Tentang Kami</a>
+                <a class="collapse-item" href="/aboutUs/create">Tambah Konten Tentang Kami</a>
+            </div>
+        </div>
+    </li>
 </ul>

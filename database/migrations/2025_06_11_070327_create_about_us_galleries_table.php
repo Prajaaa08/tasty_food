@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('about_us_galleries', function (Blueprint $table) {
             $table->id();
-            $table->enum('content', ['1', '2', '3','4','5']);
+            $table->string('name')->nullable();
+            $table->string('photo');
+            $table->enum('position', ['atas-kiri', 'atas-kanan', 'tengah-kiri','tengah-kanan','bawah']);
             $table->timestamps();
         });
     }

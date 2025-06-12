@@ -23,10 +23,9 @@ class ContactController extends Controller
      */
     public function create()
     {
-        $contacts = Contact::orderBy('created_at', 'desc')->get();
 
         return view('contacts.form')->with([
-            'contact' => $contacts,
+            'contact' => null,
         ]);
     }
 

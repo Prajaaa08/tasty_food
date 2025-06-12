@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SliderGalleryController;
@@ -56,4 +57,16 @@ Route::prefix('sliders')->middleware( ['guest'])->controller(SliderGalleryContro
     Route::put('/edit/{id}', 'update')->name('sliders.update');
 
     Route::delete('/delete/{id}', 'destroy')->name('sliders.destroy');
+});
+
+Route::prefix('aboutUs')->middleware( ['guest'])->controller(AboutUsController::class)->group(function (){
+    Route::get('/', 'index')->name('aboutUs.index');
+
+    Route::get('/create', 'create')->name('aboutUs.create');
+    Route::post('/create', 'store')->name('aboutUs.store');
+
+    Route::get('/edit/{id}', 'edit')->name('aboutUs.edit');
+    Route::put('/edit/{id}', 'update')->name('aboutUs.update');
+
+    Route::delete('/delete/{id}', 'destroy')->name('aboutUs.destroy');
 });
