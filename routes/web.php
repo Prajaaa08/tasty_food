@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,16 @@ Route::prefix('users')->middleware(['guest'])->controller(UserController::class)
     Route::put('/edit/{id}', 'update')->name('users.update');
 
     Route::delete('/delete/{id}', 'destroy')->name('users.destroy');
+});
+
+Route::prefix('menus')->middleware(['guest'])->controller(MenuController::class)->group(function () {
+    Route::get('/', 'index')->name('menus.index');
+
+    Route::get('/create', 'create')->name('menus.create');
+    Route::post('/create', 'store')->name('menus.store');
+
+    Route::get('/edit/{id}', 'edit')->name('menus.edit');
+    Route::put('/edit/{id}', 'update')->name('menus.update');
+
+    Route::delete('/delete/{id}', 'destroy')->name('menus.destroy');
 });

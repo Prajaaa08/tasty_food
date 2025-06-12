@@ -14,7 +14,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Seluruh Data Role</h6>
             </div>
             <div class="mr-4 ml-4 mt-4 mb-0">
                 @include('layouts.feedback')

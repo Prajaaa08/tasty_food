@@ -1,6 +1,6 @@
 @extends ('layouts.layout')
 
-@section('title', 'Users')
+@section('title', 'Menu')
 @push('head')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -14,7 +14,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Seluruh Data User</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Seluruh Data Menu</h6>
             </div>
             <div class="mr-4 ml-4 mt-4 mb-0">
                 @include('layouts.feedback')
@@ -24,32 +24,38 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Photo</th>
                                 <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>Deskripsi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Photo</th>
                                 <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>Deskripsi</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ( $menus as $menu )
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role->name }}</td>  
                                     <td>
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                        @if ($menu->photo)
+                                            <img src="{{ asset('storage/' . $menu->photo) }}" width="150">
+                                        @else
+                                            <img src="{{ asset('assets/img/no-image.png') }}" width="50">
+                                        @endif
+                                    </td>
+                                    <td>{{ $menu->name }}</td>
+                                    <td>{{ $menu->description }}</td>
+                                    <td>
+                                        <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Pengguna Ini?')">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Menu Ini?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

@@ -10,6 +10,7 @@ class Menu extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'photo',
         'name',
         'description',
         'created_by',

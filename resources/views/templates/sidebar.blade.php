@@ -56,6 +56,23 @@
             <span>Form User</span>
         </a>
     </li>
+    <div class="sidebar-heading">
+        Menus
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/menus" >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Menu</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/menus/create" >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Form Menu</span>
+        </a>
+    </li>
 
     {{-- <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
