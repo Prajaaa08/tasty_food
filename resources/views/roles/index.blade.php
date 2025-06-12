@@ -16,6 +16,9 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
+            <div class="mr-4 ml-4 mt-4 mb-0">
+                @include('layouts.feedback')
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -51,8 +54,66 @@
                         </tfoot>
 
                         <tbody>
+                            @foreach ($roles as $role)
                             <tr>
-                                <td>Praja</td>
+                                <td>{{$role->name}}</td>
+                                <td>
+                                    <span class="badge badge-{{ $role->news_access ? 'success' : 'danger' }}">
+                                        {{ $role->news_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->menu_access ? 'success' : 'danger' }}">
+                                        {{ $role->menu_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->about_us_access ? 'success' : 'danger' }}">
+                                        {{ $role->about_us_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->about_us_gallery_access ? 'success' : 'danger' }}">
+                                        {{ $role->about_us_gallery_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->users_access ? 'success' : 'danger' }}">
+                                        {{ $role->users_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->slider_gallery_access ? 'success' : 'danger' }}">
+                                        {{ $role->slider_gallery_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->gallery_access ? 'success' : 'danger' }}">
+                                        {{ $role->gallery_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->contact_access ? 'success' : 'danger' }}">
+                                        {{ $role->contact_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $role->business_information_access ? 'success' : 'danger' }}">
+                                        {{ $role->business_information_access ? 'Yes' : 'No' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            
+                            @endforeach
+                                {{-- <td>Praja</td>
                                 <td><span class="badge badge-danger">No</span></td>
                                 <td><span class="badge badge-success">Yes</span></td>
                                 <td><span class="badge badge-danger">No</span></td>
@@ -69,8 +130,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                                     </form>
-                                </td>
-                            </tr>
+                                </td> --}}
                         </tbody>
                     </table>
                 </div>
