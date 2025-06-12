@@ -51,11 +51,11 @@
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->description }}</td>
                                     <td>
-                                        <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                        <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
                                         <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Menu Ini?')">Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Menu Ini?')"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

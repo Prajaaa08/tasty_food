@@ -1,6 +1,6 @@
 @extends ('layouts.layout')
 
-@section('title', 'Users')
+@section('title', 'Slider Galeri')
 @push('head')
     <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -14,7 +14,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Seluruh Data User</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Seluruh Data Slider Galeri</h6>
             </div>
             <div class="mr-4 ml-4 mt-4 mb-0">
                 @include('layouts.feedback')
@@ -24,32 +24,32 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>Photo</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>Photo</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ( $sliders as $slider )
                                 <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role->name }}</td>  
                                     <td>
-                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
-                                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+                                        @if ($slider->photo)
+                                            <img src="{{ asset('storage/' . $slider->photo) }}" width="150">
+                                        @else
+                                            <img src="{{ asset('assets/img/no-image.png') }}" width="50">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('sliders.edit', $slider->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                                        <form action="{{ route('sliders.destroy', $slider->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Pengguna Ini?')"><i class="fa-solid fa-trash"></i></button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus Menu Ini?')"><i class="fa-solid fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>

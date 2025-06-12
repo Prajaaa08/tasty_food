@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SliderGalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,4 +44,16 @@ Route::prefix('menus')->middleware(['guest'])->controller(MenuController::class)
     Route::put('/edit/{id}', 'update')->name('menus.update');
 
     Route::delete('/delete/{id}', 'destroy')->name('menus.destroy');
+});
+
+Route::prefix('sliders')->middleware( ['guest'])->controller(SliderGalleryController::class)->group(function (){
+    Route::get('/', 'index')->name('sliders.index');
+
+    Route::get('/create', 'create')->name('sliders.create');
+    Route::post('/create', 'store')->name('sliders.store');
+
+    Route::get('/edit/{id}', 'edit')->name('sliders.edit');
+    Route::put('/edit/{id}', 'update')->name('sliders.update');
+
+    Route::delete('/delete/{id}', 'destroy')->name('sliders.destroy');
 });
