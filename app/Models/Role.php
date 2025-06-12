@@ -21,6 +21,6 @@ class Role extends Model
         'business_information_access',
     ];
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 }

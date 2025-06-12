@@ -39,6 +39,24 @@
         </a>
     </li>
 
+    <div class="sidebar-heading">
+        Users
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/users" >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data User</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="/users/create" >
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Form User</span>
+        </a>
+    </li>
+
     {{-- <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
