@@ -11,9 +11,25 @@
                 @include('layouts.feedback')
             </div>
             <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="" enctype="multipart/form-data">
                     @csrf
                     @method(isset($aboutUs) ? 'PUT' : 'POST')
+                    <div class="form-group">
+                        <label>Photo Kanan</label>
+                        <input type="file" name="photo_kanan" id="aboutUs" class="form-control">
+                        @if (isset($aboutUs) && $aboutUs->photo_kanan)
+                            <small class="form-text text-muted">Gambar sebelumnya. Kosongkan jika tidak ingin mengubah photo</small>
+                            <img src="{{ asset("storage/{$aboutUs->photo_kanan}") }}" width="150">
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Photo Kiri</label>
+                        <input type="file" name="photo_kiri" id="aboutUs" class="form-control">
+                        @if (isset($aboutUs) && $aboutUs->photo_kiri)
+                            <small class="form-text text-muted">Gambar sebelumnya. Kosongkan jika tidak ingin mengubah photo</small>
+                            <img src="{{ asset("storage/{$aboutUs->photo_kiri}") }}" width="150">
+                        @endif
+                    </div>
                     <div class="form-group">
                         <label>Judul Konten</label>
                         <input type="text" name="title" id="aboutUs$aboutUs" class="form-control"

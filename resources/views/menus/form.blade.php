@@ -21,7 +21,6 @@
                             <small class="form-text text-muted">Gambar sebelumnya. Kosongkan jika tidak ingin mengubah photo</small>
                             <img src="{{ asset('storage/' . $menu->photo) }}" width="150">
                         @endif
-
                     </div>
                     <div class="form-group">
                         <label>Nama Makanan</label>

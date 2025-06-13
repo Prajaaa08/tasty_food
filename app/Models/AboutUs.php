@@ -10,5 +10,7 @@ class AboutUs extends Model
         'title',
         'content',
         'position',
+        'photo_kanan',
+        'photo_kiri',
     ];
 }

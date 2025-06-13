@@ -38,7 +38,7 @@ class MenuController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // 'created_by' => 'nullable|exists:users,id',
+            'created_by' => 'nullable|exists:users,id',
         ], [
             'photo.required' => 'Foto menu wajib diisi.',
             'photo.image' => 'File harus berupa gambar.',
@@ -52,7 +52,7 @@ class MenuController extends Controller
             'photo' => $request->file('photo')->store('menus', 'public'),
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
-            'created_by' => auth()->id(),
+            'created_by' => auth()->user()->id,
         ]);
 
         if (!$menu) {

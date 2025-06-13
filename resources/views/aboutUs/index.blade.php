@@ -24,6 +24,8 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>Foto Kanan</th>
+                                <th>Foto Kiri</th>
                                 <th>Judul</th>
                                 <th>Deskripsi</th>
                                 <th>Posisi</th>
@@ -32,6 +34,8 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Foto Kanan</th>
+                                <th>Foto Kiri</th>
                                 <th>Judul</th>
                                 <th>Deskripsi</th>
                                 <th>Posisi</th>
@@ -41,6 +45,20 @@
                         <tbody>
                             @foreach ($aboutUs as $about)
                                 <tr>
+                                    <td>
+                                        @if($about->photo_kanan)
+                                            <img src="{{ asset('storage/' . $about->photo_kanan) }}" alt="Foto Kanan" class="img-fluid" style="max-width: 100px;">
+                                        @else
+                                            <img src="{{ asset('assets/img/no-image.png') }}" alt="No Image" class="img-fluid" style="max-width: 100px;">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($about->photo_kiri)
+                                            <img src="{{ asset('storage/' . $about->photo_kiri) }}" alt="Foto Kiri" class="img-fluid" style="max-width: 100px;">
+                                        @else
+                                            <img src="{{ asset('assets/img/no-image.png') }}" alt="No Image" class="img-fluid" style="max-width: 100px;">
+                                        @endif
+                                    </td>
                                     <td>{{ $about->title }}</td>
                                     <td>{{ $about->content }}</td>
                                     <td>

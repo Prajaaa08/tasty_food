@@ -51,7 +51,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function menu()
+    public function menus()
     {
         return $this->hasMany(Menu::class, 'created_by');
     }

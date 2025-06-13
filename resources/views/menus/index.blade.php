@@ -27,6 +27,7 @@
                                 <th>Photo</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
+                                <th>Dibuat Oleh</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                 <th>Photo</th>
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
+                                <th>Dibuat Oleh</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -50,6 +52,7 @@
                                     </td>
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->description }}</td>
+                                    <td>{{ $menu->creator->name }}</td>
                                     <td>
                                         <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
                                         <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display:inline;">

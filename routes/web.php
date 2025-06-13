@@ -1,17 +1,16 @@
 <?php
 
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SliderGalleryController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\SliderGalleryController;
+use App\Http\Controllers\AboutUsController;
 
-Route::get('/', function () {
-    return view('dashboard.index');
-});
 
-Route::prefix('roles')->middleware(['guest'])->controller(RoleController::class)->group(function () {
+Route::prefix('roles')->middleware(['auth'])->controller(RoleController::class)->group(function () {
     Route::get('/', 'index')->name('roles.index');
 
     Route::get('/create', 'create')->name('roles.create');
@@ -23,7 +22,7 @@ Route::prefix('roles')->middleware(['guest'])->controller(RoleController::class)
     Route::delete('/delete/{id}', 'destroy')->name('roles.destroy');
 });
 
-Route::prefix('users')->middleware(['guest'])->controller(UserController::class)->group(function () {
+Route::prefix('users')->middleware(['auth'])->controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('users.index');
 
     Route::get('/create', 'create')->name('users.create');
@@ -35,7 +34,7 @@ Route::prefix('users')->middleware(['guest'])->controller(UserController::class)
     Route::delete('/delete/{id}', 'destroy')->name('users.destroy');
 });
 
-Route::prefix('menus')->middleware(['guest'])->controller(MenuController::class)->group(function () {
+Route::prefix('menus')->middleware(['auth'])->controller(MenuController::class)->group(function () {
     Route::get('/', 'index')->name('menus.index');
 
     Route::get('/create', 'create')->name('menus.create');
@@ -47,7 +46,7 @@ Route::prefix('menus')->middleware(['guest'])->controller(MenuController::class)
     Route::delete('/delete/{id}', 'destroy')->name('menus.destroy');
 });
 
-Route::prefix('sliders')->middleware( ['guest'])->controller(SliderGalleryController::class)->group(function (){
+Route::prefix('sliders')->middleware(['auth'])->controller(SliderGalleryController::class)->group(function () {
     Route::get('/', 'index')->name('sliders.index');
 
     Route::get('/create', 'create')->name('sliders.create');
@@ -59,7 +58,7 @@ Route::prefix('sliders')->middleware( ['guest'])->controller(SliderGalleryContro
     Route::delete('/delete/{id}', 'destroy')->name('sliders.destroy');
 });
 
-Route::prefix('aboutUs')->middleware( ['guest'])->controller(AboutUsController::class)->group(function (){
+Route::prefix('aboutUs')->middleware(['auth'])->controller(AboutUsController::class)->group(function () {
     Route::get('/', 'index')->name('aboutUs.index');
 
     Route::get('/create', 'create')->name('aboutUs.create');
@@ -70,3 +69,26 @@ Route::prefix('aboutUs')->middleware( ['guest'])->controller(AboutUsController::
 
     Route::delete('/delete/{id}', 'destroy')->name('aboutUs.destroy');
 });
+Route::prefix('news')->middleware(['auth'])->controller(NewsController::class)->group(function () {
+    Route::get('/', 'index')->name('news.index');
+
+    Route::get('/create', 'create')->name('news.create');
+    Route::post('/create', 'store')->name('news.store');
+
+    Route::get('/edit/{id}', 'edit')->name('news.edit');
+    Route::put('/edit/{id}', 'update')->name('news.update');
+
+    Route::delete('/delete/{id}', 'destroy')->name('news.destroy');
+});
+
+Route::get('/', function () {
+    return view('dashboard.index');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

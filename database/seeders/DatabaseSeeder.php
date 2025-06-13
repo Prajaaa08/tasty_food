@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'role_id' => 1, // Assuming the first role is 'Super Admin'
             'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
         ]);
     }
 }

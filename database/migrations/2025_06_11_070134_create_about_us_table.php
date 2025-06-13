@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->longText('content');
             $table->enum('position', ['atas', 'tengah', 'bawah']);
+            $table->string('photo_kanan')->nullable();
+            $table->string('photo_kiri');
             $table->string('title');
             $table->timestamps();
         });

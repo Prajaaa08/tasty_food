@@ -38,6 +38,8 @@ class AboutUsController extends Controller
             'position' => 'required|in:atas,tengah,bawah',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'photo_kanan' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_kiri' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
             'position.required' => 'Posisi wajib dipilih.',
             'title.required' => 'Judul wajib diisi.',
@@ -45,19 +47,58 @@ class AboutUsController extends Controller
             'title.max' => 'Judul maksimal 255 karakter.',
             'content.required' => 'Konten wajib diisi.',
             'content.string' => 'Konten harus berupa teks.',
+            'photo_kanan.image' => 'Foto kanan harus berupa gambar.',
+            'photo_kanan.mimes' => 'Foto kanan harus berupa file dengan format jpeg, png, jpg, gif, atau svg.',
+            'photo_kanan.max' => 'Foto kanan maksimal 2MB.',
+            'photo_kiri.image' => 'Foto kiri harus berupa gambar.',
+            'photo_kiri.mimes' => 'Foto kiri harus berupa file dengan format jpeg, png, jpg, gif, atau svg.',
+            'photo_kiri.max' => 'Foto kiri maksimal 2MB.',
         ]);
 
-        $aboutUs= AboutUs::create([
+        $posisi = $validated['position'];
+        $hasKiri = $request->hasFile('photo_kiri');
+        $hasKanan = $request->hasFile('photo_kanan');
+
+        if (in_array($posisi, ['atas', 'tengah'])) {
+            if (!$hasKiri || !$hasKanan) {
+                return back()->withInput()->withErrors([
+                    'photo_kiri' => 'Kedua foto wajib diisi untuk posisi atas/tengah.',
+                    'photo_kanan' => 'Kedua foto wajib diisi untuk posisi atas/tengah.',
+                ]);
+            }
+        } elseif ($posisi === 'bawah') {
+            if (!$hasKiri) {
+                return back()->withInput()->withErrors([
+                    'photo_kiri' => 'Foto kiri wajib diisi untuk posisi bawah.',
+                ]);
+            }
+
+            if ($hasKanan) {
+                return back()->withInput()->withErrors([
+                    'photo_kanan' => 'Foto kanan tidak boleh diisi untuk posisi bawah.',
+                ]);
+            }
+        }
+
+        // Simpan foto jika ada
+        $photoKiriPath = $hasKiri ? $request->file('photo_kiri')->store('about_us', 'public') : null;
+        $photoKananPath = $hasKanan ? $request->file('photo_kanan')->store('about_us', 'public') : null;
+
+        $aboutUs = AboutUs::create([
             'position' => $validated['position'],
             'title' => $validated['title'],
             'content' => $validated['content'],
+            'photo_kiri' => $photoKiriPath,
+            'photo_kanan' => $photoKananPath,
         ]);
 
         if (!$aboutUs) {
             return back()->with(['error' => 'Gagal Membuat About Us Baru']);
         }
+
         return redirect()->route('aboutUs.index')->with('success', 'About Us entry created successfully.');
     }
+
 
     /**
      * Display the specified resource.
@@ -92,6 +133,8 @@ class AboutUsController extends Controller
             'position' => 'required|in:atas,tengah,bawah',
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'photo_kanan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_kiri' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
             'position.required' => 'Posisi wajib dipilih.',
             'title.required' => 'Judul wajib diisi.',
@@ -99,6 +142,12 @@ class AboutUsController extends Controller
             'title.max' => 'Judul maksimal 255 karakter.',
             'content.required' => 'Konten wajib diisi.',
             'content.string' => 'Konten harus berupa teks.',
+            'photo_kanan.image' => 'Foto kanan harus berupa gambar.',
+            'photo_kanan.mimes' => 'Foto kanan harus berupa file dengan format jpeg, png, jpg, gif, atau svg.',
+            'photo_kanan.max' => 'Foto kanan maksimal 2MB.',
+            'photo_kiri.image' => 'Foto kiri harus berupa gambar.',
+            'photo_kiri.mimes' => 'Foto kiri harus berupa file dengan format jpeg, png, jpg, gif, atau svg.',
+            'photo_kiri.max' => 'Foto kiri maksimal 2MB.',
         ]);
 
         $aboutUs->update($validated);

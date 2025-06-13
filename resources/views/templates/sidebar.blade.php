@@ -94,4 +94,18 @@
             </div>
         </div>
     </li>
+
+    <div class="sidebar-heading">News</div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsenews" aria-expanded="true" aria-controls="collapsenews">
+            <i class="fa-solid fa-photo"></i>
+            <span>News</span>
+        </a>
+        <div id="collapsenews" class="collapse" aria-labelledby="headingnews" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/news">Konten Berita</a>
+                <a class="collapse-item" href="/news/create">Tambah Berita</a>
+            </div>
+        </div>
+    </li>
 </ul>
