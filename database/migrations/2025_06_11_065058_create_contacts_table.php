@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('message');
+            // $table->timestamp('created_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

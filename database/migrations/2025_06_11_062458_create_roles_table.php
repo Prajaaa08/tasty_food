@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('gallery_access')->default(false);
             $table->boolean('contact_access')->default(false);
             $table->boolean('business_information_access')->default(false);
+            $table->boolean('role_access')->default(false);
             $table->timestamps();
         });
 
