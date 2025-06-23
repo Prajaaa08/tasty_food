@@ -13,7 +13,7 @@ class SliderGalleryController extends Controller
     public function index()
     {
         $sliders = SliderGallery::orderBy('created_at', 'desc')->get();
-        return view('sliders.index')->with([
+        return view('admin.sliders.index')->with([
             'sliders' => $sliders,
         ]);
     }
@@ -23,7 +23,7 @@ class SliderGalleryController extends Controller
      */
     public function create()
     {
-        return view('sliders.form')->with([
+        return view('admin.sliders.form')->with([
             'sliders' => null,
         ]);
     }
@@ -50,7 +50,7 @@ class SliderGalleryController extends Controller
             return back()->with(['error' => 'Gagal Membuat Slider Baru']);
         }
 
-        return redirect()->route('sliders.index')->with(['success' => 'Berhasil Membuat Slider Baru']);
+        return redirect()->route('admin.sliders.index')->with(['success' => 'Berhasil Membuat Slider Baru']);
     }
 
     /**
@@ -59,7 +59,7 @@ class SliderGalleryController extends Controller
     public function show(string $id)
     {
         $sliders = SliderGallery::findOrFail($id);
-        return view('sliders.index')->with([
+        return view('admin.sliders.index')->with([
             'sliders' => $sliders,
         ]);
     }
@@ -70,7 +70,7 @@ class SliderGalleryController extends Controller
     public function edit(string $id)
     {
         $result = SliderGallery::findOrFail($id);
-        return view('sliders.form')->with([
+        return view('admin.sliders.form')->with([
             'slider' => $result,
         ]);
     }
@@ -100,7 +100,7 @@ class SliderGalleryController extends Controller
             return back()->with(['error' => 'Gagal Memperbarui Slider']);
         }
 
-        return redirect()->route('sliders.index')->with(['success' => 'Berhasil Memperbarui Slider']);
+        return redirect()->route('admin.sliders.index')->with(['success' => 'Berhasil Memperbarui Slider']);
     }
 
     /**
@@ -115,6 +115,6 @@ class SliderGalleryController extends Controller
             return back()->with(['error' => 'Gagal Menghapus Slider']);
         }
 
-        return redirect()->route('sliders.index')->with(['success' => 'Berhasil Menghapus Slider']);
+        return redirect()->route('admin.sliders.index')->with(['success' => 'Berhasil Menghapus Slider']);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class NewsController extends Controller
 {
@@ -12,8 +13,10 @@ class NewsController extends Controller
      */
     public function index()
     {
+        Gate::authorize('access-news');
+
         $news = News::orderBy('created_at', 'desc')->get();
-        return view('news.index')->with([
+        return view('admin.news.index')->with([
             'news' => $news,
         ]);
     }
@@ -23,7 +26,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        return view('news.form')->with([
+        Gate::authorize('access-news');
+
+        return view('admin.news.form')->with([
             'news' => null,
         ]);
     }
@@ -33,6 +38,8 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('access-news');
+
         $validated = $request->validate([
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'slug' => 'required|string|max:255|unique:news,slug',
@@ -64,7 +71,7 @@ class NewsController extends Controller
             return back()->with(['error' => 'Gagal Membuat Berita Baru']);
         }
 
-        return redirect()->route('news.index')->with(['success' => 'Berhasil Membuat Berita Baru']);
+        return redirect()->route('admin.news.index')->with(['success' => 'Berhasil Membuat Berita Baru']);
     }
 
     /**
@@ -72,8 +79,10 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize('access-news');
+
         $news = News::findOrFail($id);
-        return view('news.index')->with([
+        return view('admin.news.index')->with([
             'news' => $news,
         ]);
     }
@@ -83,8 +92,10 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('access-news');
+
         $result = News::findOrFail($id);
-        return view('news.form')->with([
+        return view('admin.news.form')->with([
             'news' => $result,
         ]);
     }
@@ -94,6 +105,8 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Gate::authorize('access-news');
+
         $news = News::findOrFail($id);
 
         $validated = $request->validate([
@@ -124,7 +137,7 @@ class NewsController extends Controller
             return back()->with(['error' => 'Gagal Memperbarui Berita']);
         }
 
-        return redirect()->route('news.index')->with(['success' => 'Berhasil Memperbarui Berita']);
+        return redirect()->route('admin.news.index')->with(['success' => 'Berhasil Memperbarui Berita']);
     }
 
     /**
@@ -132,6 +145,8 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('access-news');
+
         $news = News::findOrFail($id);
         $news->delete();
 
@@ -139,6 +154,6 @@ class NewsController extends Controller
             return back()->with(['error' => 'Gagal Menghapus Berita']);
         }
 
-        return redirect()->route('news.index')->with(['success' => 'Berhasil Menghapus Berita']);
+        return redirect()->route('admin.news.index')->with(['success' => 'Berhasil Menghapus Berita']);
     }
 }

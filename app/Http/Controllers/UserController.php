@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Laravel\SerializableClosure\Attributes\Middleware;
+// #[Middleware('auth')]
+// #[Middleware(\App\Http\Middleware\RoleAccessMiddleware::class)]
 
 class UserController extends Controller
 {
@@ -13,9 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        Gate::authorize('access-users');
+
         $users = User::orderBy('created_at', 'desc')->get();
 
-        return view('users.index')->with([
+        return view('admin.users.index')->with([
             'users' => $users,
         ]);
     }
@@ -25,9 +31,11 @@ class UserController extends Controller
      */
     public function create()
     {
+        Gate::authorize('access-users');
+
         $roles = Role::orderBy('created_at', 'desc')->get();
 
-        return view('users.form')->with([
+        return view('admin.users.form')->with([
             'roles' => $roles,
             'user' => null,
         ]);
@@ -38,6 +46,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('access-users');
+
         $validated = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email',
@@ -64,7 +74,7 @@ class UserController extends Controller
             return back()->with(['error', 'Gagal Membuat Pengguna Baru']);
         }
 
-        return redirect()->route('users.index')->with(['success' => 'Berhasil Membuat Pengguna Baru']);
+        return redirect()->route('admin.users.index')->with(['success' => 'Berhasil Membuat Pengguna Baru']);
     }
 
     /**
@@ -72,9 +82,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize('access-users');
+
         $user = User::findOrFail($id);
 
-        return view('users.index')->with([
+        return view('admin.users.index')->with([
             'user' => $user,
         ]);
     }
@@ -84,10 +96,12 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        Gate::authorize('access-users');
+
         $roles = Role::orderBy('created_at', 'desc')->get();
         $user = User::findOrFail($id);
 
-        return view('users.form')->with([
+        return view('admin.users.form')->with([
             'roles' => $roles,
             'user' => $user,
         ]);
@@ -98,12 +112,14 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        Gate::authorize('access-users');
+
         $user = User::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|min:8|confirmed',
+            'password' => 'nullable|min:8',
             'role_id' => 'required|exists:roles,id',
         ], [
             'name.required' => 'Nama pengguna wajib diisi.',
@@ -122,7 +138,7 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('users.index')->with(['success' => 'Berhasil Memperbarui Pengguna']);
+        return redirect()->route('admin.users.index')->with(['success' => 'Berhasil Memperbarui Pengguna']);
     }
 
     /**
@@ -130,10 +146,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        Gate::authorize('access-users');
+        
         $user = User::findOrFail($id);
 
         if ($user->delete()) {
-            return redirect()->route('users.index')->with(['success' => 'Berhasil Menghapus Pengguna']);
+            return redirect()->route('admin.users.index')->with(['success' => 'Berhasil Menghapus Pengguna']);
         }
 
         return back()->with(['error' => 'Gagal Menghapus Pengguna']);

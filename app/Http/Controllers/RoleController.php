@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -12,9 +13,11 @@ class RoleController extends Controller
      */
     public function index()
     {
+        // Gate::authorize('access-role');
+
         $roles = Role::orderBy('created_at', 'desc')->get();
 
-        return view('roles.index')->with([
+        return view('admin.roles.index')->with([
             'roles' => $roles,
         ]);
     }
@@ -24,7 +27,9 @@ class RoleController extends Controller
      */     
     public function create()
     {
-        return view('roles.form');
+        // Gate::authorize('access-role');
+
+        return view('admin.roles.form');
     }
 
     /**
@@ -32,6 +37,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        // Gate::authorize('access-role');
+
         $validated = $request->validate([
             'name' => 'required|unique:roles,name',
             'news_access' => 'boolean',
@@ -43,6 +50,7 @@ class RoleController extends Controller
             'gallery_access' => 'boolean',
             'contact_access' => 'boolean',
             'business_information_access' => 'boolean',
+            'role_access' => 'boolean',
         ], [
             'name.required' => 'Nama role wajib diisi.',
             'name.unique' => 'Nama role sudah digunakan.',
@@ -55,7 +63,7 @@ class RoleController extends Controller
             return back()->with(['error', 'Gagal Membuat Role Baru']);
         }
 
-        return redirect()->route('roles.index')->with(['success' => 'Berhasil Membuat Role Baru']);
+        return redirect()->route('admin.roles.index')->with(['success' => 'Berhasil Membuat Role Baru']);
     }
 
     /**
@@ -68,8 +76,10 @@ class RoleController extends Controller
      */
     public function edit(Request $request, string $id)
     {
+        // Gate::authorize('access-role');
+
         $result = Role::findOrFail($id);
-        return view('roles.form')->with([
+        return view('admin.roles.form')->with([
             'role' => $result,
         ]);
     }
@@ -79,6 +89,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Gate::authorize('access-role');
+
         $role = Role::findOrFail($id);
 
         $validated = $request->validate([
@@ -97,6 +109,7 @@ class RoleController extends Controller
             'gallery_access' => 'boolean',
             'contact_access' => 'boolean',
             'business_information_access' => 'boolean',
+            'role_access' => 'boolean',
         ], [
             'name.required' => 'Nama role wajib diisi.',
             'name.unique' => 'Nama role sudah digunakan.',
@@ -109,7 +122,7 @@ class RoleController extends Controller
             return back()->with(['error' => 'Gagal Mengupdate Role']);
         }
 
-        return redirect()->route('roles.index')->with(['success' => 'Berhasil Mengupdate Role']);
+        return redirect()->route('admin.roles.index')->with(['success' => 'Berhasil Mengupdate Role']);
     }
 
     /**
@@ -117,6 +130,8 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        // Gate::authorize('access-role');
+
         $role = Role::findOrFail($id);
 
         $role->delete();
@@ -124,6 +139,6 @@ class RoleController extends Controller
         if (!$role) {
             return back()->with(['error' => 'Gagal Menghapus Role']);
         }
-        return redirect()->route('roles.index')->with(['success' => 'Berhasil Menghapus Role']);
+        return redirect()->route('admin.roles.index')->with(['success' => 'Berhasil Menghapus Role']);
     }
 }
