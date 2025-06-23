@@ -1,0 +1,124 @@
+.galeri-slider {
+    /* width: 100% */
+    max-width: 800px;
+    height: 500px;
+    /* margin: auto; */
+    /* padding: 2rem 0; */
+    /* background-color: black; */
+}
+
+.swiper-section {
+    background-color: rgb(234, 234, 234);
+    /* padding: 4rem 2rem; */
+    text-align: center;
+    padding-top: 4rem;
+    height: 400px;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+.swiper-slide img {
+    /* width: 40%; */
+    /* height: 100px; */
+    border-radius: 10px;
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+    object-fit: cover;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000; /* warna ikon panah */
+    transform: translateY(-200%);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 0px; /* ukuran ikon panah */
+}
+
+@media (max-width: 768px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        width: 28px;
+        height: 28px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 14px;
+    }
+
+    .swiper-button-prev {
+        left: 5px;
+    }
+
+    .swiper-button-next {
+        right: 5px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .swiper-slide img {
+        width: 30%;
+    }
+}
+
+.galeri-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.galeri-item img {
+    width: 100%;
+    height: 206px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.3s ease;
+
+}
+
+/* Responsive tablet */
+@media (max-width: 768px) {
+    .galeri-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Responsive HP */
+@media (max-width: 480px) {
+    .galeri-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.galeri-grid img:hover {
+    transform: scale(1.05);
+}
+
+.galeri-foto-section {
+    background-color: #fff;
+    padding: 3rem 1rem;
+}
+
+.btn-lihat {
+    background-color: black;
+    color: white;
+    padding: 0.75rem 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-lihat:hover {
+    background-color: gray;
+}
+.hidden-foto {
+    display: none;
+}

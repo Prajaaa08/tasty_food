@@ -1,0 +1,225 @@
+.berita-section {
+    padding: 4rem 2rem;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+}
+
+.berita-container {
+    display: flex;
+    max-width: 1100px;
+    /* width: 100%; */
+    /* background-color: #ffffff; */
+    border-radius: 10px;
+    overflow: hidden;
+    height: 500px; /* <- Naikin tinggi di sini */
+}
+
+.berita-besar-wrapper {
+    display: flex;
+    gap: 2rem; /* INI YANG KASIH JARAK antara foto dan konten */
+    align-items: flex-start;
+    padding: 1rem 0;
+}
+
+.berita-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 500px;
+    border-radius: 15px 15px 15px 15px; /* Biar sudutnya melengkung */
+    /* padding-right: 1rem; */
+}
+
+.berita-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    padding-left: 1rem;
+    height: 100%;
+    max-width: 500px; /* batasin lebar kalau perlu */
+    flex: 1;
+}
+
+.berita-text-scroll {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    /* padding-right: 10px; */
+    /* 🔥 INI PENTING */
+    overflow-x: hidden;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* Optional scrollbar custom biar lebih clean */
+.berita-text-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.berita-text-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+.berita-button {
+    align-self: flex-start; /* biar button tetap di kiri */
+    background-color: orange;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.berita-button:hover {
+    background-color: darkorange;
+}
+
+.berita-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.berita-content p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.berita-button {
+    display: inline-block;
+    padding: 0.7rem 1.2rem;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.berita-button:hover {
+    background-color: #444;
+}
+
+.berita-lainnya-section {
+    padding: 4rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.berita-lainnya-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.berita-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.berita-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* <--- Animasi smooth */
+}
+
+.berita-card:hover {
+    transform: translateY(-8px); /* <--- Muncul ke atas dikit */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* <--- Bayangan lebih besar */
+}
+
+.berita-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-body h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-body p {
+    flex-grow: 1;
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-link {
+    color: orange;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    color: #888;
+}
+
+@media (max-width: 768px) {
+    .berita-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di tablet / mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .berita-grid {
+        grid-template-columns: 1fr; /* 1 kolom di HP kecil */
+    }
+}
+@media (max-width: 768px) {
+    .berita-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .berita-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .berita-content {
+        padding: 0 10px;
+    }
+
+    .berita-button {
+        margin-top: 10px;
+    }
+    .berita-text-scroll {
+        max-height: 100px;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+}
